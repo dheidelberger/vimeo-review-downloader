@@ -1,0 +1,27 @@
+{
+    "name": "Vimeo Review Downloader",
+    "version": "1.0.0",
+    "manifest_version": 2,
+    "description": "Download review notes from Vimeo beyond the basic CSV file Vimeo offers.",
+    "background": {
+        "page": "/background/background.html",
+        "persistent": false
+    },
+    "content_scripts": [
+        {
+            "matches": ["*://*.vimeo.com/*", "*://vimeo.com/*"],
+            "js": ["/contentscript/contentscript.js"],
+            "run_at": "document_start"
+        }
+    ],
+    "page_action": {
+        "default_icon": {
+            "48": "icons/Icon48.png",
+            "128": "icons/Icon128.png"
+        },
+        "default_title": "Download notes from a Vimeo review page."
+    },
+    "permissions": ["downloads", "activeTab"],
+
+    "web_accessible_resources": ["/popup/modal.html"]
+}
