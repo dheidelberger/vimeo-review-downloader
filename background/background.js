@@ -92,11 +92,17 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
 chrome.tabs.onActivated.addListener(function (currentTab) {
     console.log('Tab activation changed');
-    console.log(currentTab);
-    if (comments[currentTab.tabId]) {
-        setIcon(currentTab.tabId, 'Green');
+    console.log(currentTab.tabId);
+    console.log(comments);
+    if (comments.hasOwnProperty(currentTab.tabId)) {
+        if (comments[currentTab.tabId]) {
+            setIcon(currentTab.tabId, 'Green');
+        } else {
+            setIcon(currentTab.tabId, 'Red');
+        }
     } else {
-        setIcon(currentTab.tabId, 'Red');
+        console.log('Hide');
+        chrome.pageAction.hide(currentTab.tabId);
     }
 });
 
